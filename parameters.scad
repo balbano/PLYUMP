@@ -119,7 +119,8 @@ echo(str("Outside radius gear peristaltic= ",gear_peristaltic_outside_radius));
 gear_motor_neck_height = 10;
 gear_motor_neck_diameter = 13;
 gear_motor_thickness = 608zz_thickness * 2; // "*2" due to herringbone!
-gear_motor_shaft_diameter = 5.5;
+gear_motor_shaft_diameter = 5.5; // Diameter from round face to round face (larger).
+gear_motor_d_shaft_diameter = 4.5; // Diameter from round face to flat face (smaller).
 
 // Pitch diameter: Diameter of pitch circle.
 gear_motor_pitch_diameter = gear_motor_teeth * circular_pitch / 180;

@@ -22,9 +22,13 @@ module gear_motor(){
 			mirror([0,0,1])
 				half_gear_motor();
 				gear_motor_neck();
+
 		}
 		union(){ // Substract
-			gear_motor_shaft();
+			#difference(){
+                gear_motor_shaft();
+                gear_motor_d_shaft();
+            }
 			gear_motor_screw_holder();
 		}
 	}
@@ -50,10 +54,19 @@ module gear_motor_neck(){
 
 module gear_motor_shaft(){
 	translate([0, 0, gear_motor_neck_height]) 
-		#cylinder( r = gear_motor_shaft_diameter / 2,  
+		cylinder( r = gear_motor_shaft_diameter / 2,  
 			h = ( gear_motor_thickness + gear_motor_neck_height ) , 
 			$fn = birthday_day,
 			center=true);
+}
+
+module gear_motor_d_shaft(){
+    translate([0, gear_motor_shaft_diameter/2 + (gear_motor_d_shaft_diameter - gear_motor_shaft_diameter/2), gear_motor_neck_height ] ) {
+        cube(size=[gear_motor_shaft_diameter * 1.1,
+                    gear_motor_shaft_diameter,
+                    (gear_motor_thickness + gear_motor_neck_height) * 1.1 ],
+              center=true);
+    }
 }
 
 module gear_motor_screw_holder(){
@@ -65,7 +78,7 @@ module gear_motor_screw_holder(){
 					center=true);
 			}	
 		}
-		// // Bolt hole
+		// Bolt hole
 		// translate([0, gear_motor_neck_diameter/2 / (1.65) , gear_motor_thickness + gear_motor_neck_height ]) {
 		// 	cube(size=[gear_motor_bolt_length, gear_motor_bolt_width, gear_motor_thickness ], center=true);	
 		// }
